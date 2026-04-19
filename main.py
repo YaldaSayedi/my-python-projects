@@ -1,23 +1,31 @@
 
-print("Welcome to the rollercoaster! ")
-height= int(input("What is your height?"))
-bill = 0
+print("Welcome to Python pizza delivery")
+pizza_size = input("What size of pizza do you want? S, M or L")
+Pepperoni = input("Do you want pepperoni on your Pizza? Y or N")
+Extra_cheese = input("Do you want extra cheese? Y or N")
 
-if height >= 120:
-    print("You can ride the rollercoaster!")
-    age= int(input("What is your age?"))
-    if age < 12:
-        bill= 5
-        print("Your ticket cost it 5$")
-    elif age <= 18:
-        bill= 10
-        print("Your ticket cost is 10$")
-    else:
-        bill= 12
-        print("Your ticket cost is 12$")
-    wants_photo= input("Do you want a photo taken? Y or N?")
-    if wants_photo.upper() == "Y":
-        bill += 3
-    print(f"Your final bill is ${bill}")
+bill= 0
+
+if pizza_size == "S":
+    bill += 15
+elif pizza_size == "M":
+    bill += 20
+elif pizza_size == "L":
+    bill += 25
 else:
-    print("I am sorry but you can not ride the rollercoaster!")
+    print("You have chosen an invalid size.")
+
+if Pepperoni == "Y":
+    if pizza_size == "S":
+        bill += 2
+    else:
+        bill += 3
+if Extra_cheese == "Y":
+    bill += 1
+
+print("Your final bill is" + str(bill))
+
+
+
+
+
