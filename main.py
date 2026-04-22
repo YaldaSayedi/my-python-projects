@@ -1,53 +1,33 @@
 import random
-rock = '''
-    _______
----'   ____)
-      (_____)
-      (_____)
-      (____)
----.__(___)
-'''
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+           'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+           'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-paper = '''
-    _______
----'   ____)____
-          ______)
-          _______)
-         _______)
----.__________)
-'''
+print("Welcome to the PyPassword Generator!")
+nr_letters = int(input("How many letters would you like in your password?\n"))
+nr_symbols = int(input(f"How many symbols would you like?\n"))
+nr_numbers = int(input(f"How many numbers would you like?\n"))
 
-scissors = '''
-    _______
----'   ____)____
-          ______)
-       __________)
-      (____)
----.__(___)
-'''
-game_images = [rock, paper, scissors]
+password_list=[]
+for char in range(0, nr_letters):
+   password_list.append(random.choice(letters))
 
-user_choice= int(input("What do you choose? type 0 for Rock, 1 for paper, 2 for scissors: "))
-if user_choice >=0 and user_choice <=2:
-    print("Your choice", game_images[user_choice])
+for char in range(0, nr_symbols):
+    password_list.append(random.choice(symbols))
 
-computer_choice = random.randint(0,2)
-print("Computer Choice", game_images[computer_choice])
+for char in range(0, nr_numbers):
+    password_list.append(random.choice(numbers))
+print(password_list)
+random.shuffle(password_list)
+print(password_list)
 
-if user_choice >=3 or user_choice <0:
-    print("Invalid Choice")
-elif user_choice ==0 and computer_choice == 2:
-    print("You Won!")
-elif computer_choice == 0 and computer_choice==2:
-    print("You Lost!")
-elif user_choice > computer_choice:
-    print("You Won!")
-elif computer_choice > user_choice:
-    print(" You lsot!")
-elif user_choice == computer_choice:
-    print("Its a draw!")
+password = ""
+for char in password_list:
+    password += char
 
-
+print("Your password is ", password)
 
 
 
