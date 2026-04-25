@@ -1,34 +1,42 @@
 import random
-letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-           'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-           'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+import hangman_art
+import hangman_words
 
-print("Welcome to the PyPassword Generator!")
-nr_letters = int(input("How many letters would you like in your password?\n"))
-nr_symbols = int(input(f"How many symbols would you like?\n"))
-nr_numbers = int(input(f"How many numbers would you like?\n"))
+print(hangman_art.logo)
+live= 6
+chosen_word = random.choice(hangman_words.word_list)
+print(chosen_word)
 
-password_list=[]
-for char in range(0, nr_letters):
-   password_list.append(random.choice(letters))
+placeholder= ""
+for position in chosen_word:
+    placeholder = "_ "
+    print(placeholder, end= "")
+game_over = False
+correct_letters = []
 
-for char in range(0, nr_symbols):
-    password_list.append(random.choice(symbols))
-
-for char in range(0, nr_numbers):
-    password_list.append(random.choice(numbers))
-print(password_list)
-random.shuffle(password_list)
-print(password_list)
-
-password = ""
-for char in password_list:
-    password += char
-
-print("Your password is ", password)
-
-
-
+while not game_over:
+    print(f"****************************{live}/6 LIVES LEFT****************************")
+    guess = input("\nEnter your guess: ").lower()
+    if guess in correct_letters:
+        print(f"You have already guessed {guess}")
+    display= ""
+    for letter in chosen_word:
+        if letter == guess:
+            display += letter
+            correct_letters.append(guess)
+        elif letter in  correct_letters:
+             display += letter
+        else:
+            display += "_ "
+    print("word to guess:", display)
+    if guess not in correct_letters:
+        live -= 1
+        print(f"You guessed {guess}, that's not in the word :(")
+        if live == 0:
+            game_over = True
+            print(f"*********************** It Was {chosen_word} YOU LOSE!**********************")
+    if "_" not in display:
+        game_over = True
+        print("****************************YOU WIN****************************")
+    print(hangman_art.stages[live])
 
